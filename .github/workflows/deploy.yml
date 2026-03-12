@@ -1,0 +1,20 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Build Docker image
+      run: docker build -t hello-cicd-app .
+
+    - name: Run container test
+      run: docker run -d -p 5000:5000 hello-cicd-app
